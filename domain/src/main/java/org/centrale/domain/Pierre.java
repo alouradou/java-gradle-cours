@@ -5,7 +5,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor // cf https://projectlombok.org
 public class Pierre implements Hand {
 
-
     @Override
     public int playWith(Hand h) {
         return h.playWithPierre(this);
