@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.rockpaperscissors;
 
 public class HandFactory {
 
