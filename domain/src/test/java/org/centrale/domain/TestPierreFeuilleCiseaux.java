@@ -15,4 +15,18 @@ public class TestPierreFeuilleCiseaux {
         Assertions.assertEquals(c.playWith(new Ciseaux()), 0);
     }
 
+    @Test
+    public void gameImplementation(){
+RockPaperScissors game = new RockPaperScissors();
+        Assertions.assertEquals(game.playTurn("rock", "rock"), 0);
+        Assertions.assertEquals(game.playTurn("rock", "paper"), -1);
+        Assertions.assertEquals(game.playTurn("rock", "scissors"), 1);
+        Assertions.assertEquals(game.playTurn("paper", "rock"), 1);
+        Assertions.assertEquals(game.playTurn("paper", "paper"), 0);
+        Assertions.assertEquals(game.playTurn("paper", "scissors"), -1);
+        Assertions.assertEquals(game.playTurn("scissors", "rock"), -1);
+        Assertions.assertEquals(game.playTurn("scissors", "paper"), 1);
+        Assertions.assertEquals(game.playTurn("scissors", "scissors"), 0);
+    }
+
 }

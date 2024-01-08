@@ -6,9 +6,7 @@ import lombok.NoArgsConstructor;
 public class Pierre implements Hand {
 
     @Override
-    public int playWith(Hand h) {
-        return h.playWithPierre(this);
-    }
+    public int playWith(Hand h) { return -h.playWithPierre(this); }
 
     @Override
     public int playWithPierre(Pierre p) {
