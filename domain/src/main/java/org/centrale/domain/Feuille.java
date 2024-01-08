@@ -1,5 +1,8 @@
 package org.centrale.domain;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor // cf https://projectlombok.org
 public class Feuille implements Hand{
 
     @Override // cf https://projectlombok.org
