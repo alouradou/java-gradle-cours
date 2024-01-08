@@ -7,7 +7,7 @@ public class Ciseaux implements Hand{
 
     @Override
     public int playWith(Hand h) {
-        return h.playWithCiseaux(this);
+        return -h.playWithCiseaux(this);
     }
 
     @Override

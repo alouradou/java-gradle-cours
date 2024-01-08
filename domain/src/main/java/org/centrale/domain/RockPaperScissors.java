@@ -10,7 +10,7 @@ public class RockPaperScissors {
         System.out.println("Vous avez choisi " + this.convertIntToEnglish(handPlayer1) + "\n");
 
         int handPlayer2 = (int)(Math.random() * 3) + 1;
-        System.out.println("L'adversaire a choisi " + this.convertIntToEnglish(handPlayer2) + "\n");
+        System.out.println("L'adversaire a choisi " + this.convertIntToEnglish(handPlayer2 ) + "\n");
 
         System.out.println(this.playTurn(handPlayer1, handPlayer2));
     }
