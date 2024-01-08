@@ -2,4 +2,6 @@ rootProject.name = 'centrale-java'
 include 'domain'
 include 'cli'
 include 'api'
+include 'domain:tourniquet'
+findProject(':domain:tourniquet')?.name = 'tourniquet'
 

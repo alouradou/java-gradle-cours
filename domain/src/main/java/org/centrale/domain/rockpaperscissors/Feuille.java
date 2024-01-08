@@ -1,27 +1,27 @@
-package org.centrale.domain;
+package org.centrale.domain.rockpaperscissors;
 
 import lombok.NoArgsConstructor;
 
 @NoArgsConstructor // cf https://projectlombok.org
-public class Ciseaux implements Hand{
+public class Feuille implements Hand{
 
-    @Override
+    @Override // cf https://projectlombok.org
     public int playWith(Hand h) {
-        return -h.playWithCiseaux(this);
+        return -h.playWithFeuille(this);
     }
 
     @Override
     public int playWithPierre(Pierre p) {
-        return -1;
+        return 1;
     }
 
     @Override
     public int playWithCiseaux(Ciseaux c) {
-        return 0;
+        return -1;
     }
 
     @Override
     public int playWithFeuille(Feuille f) {
-        return 1;
+        return 0;
     }
 }

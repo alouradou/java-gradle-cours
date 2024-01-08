@@ -1,6 +1,4 @@
-package org.centrale.domain;
-
-import java.util.Scanner;
+package org.centrale.domain.rockpaperscissors;
 
 public class RockPaperScissors {
     public void playGame(int handPlayer1) {

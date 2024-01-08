@@ -1,4 +1,4 @@
-package org.centrale.domain;
+package org.centrale.domain.rockpaperscissors;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
