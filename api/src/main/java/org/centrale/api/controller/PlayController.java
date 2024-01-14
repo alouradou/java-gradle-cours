@@ -1,7 +1,6 @@
 package org.centrale.api.controller;
 
 import lombok.AllArgsConstructor;
-import org.centrale.api.entity.PlayerEntity;
 import org.centrale.api.service.GameService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
