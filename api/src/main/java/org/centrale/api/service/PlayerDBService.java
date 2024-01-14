@@ -1,7 +1,7 @@
 package org.centrale.api.service;
 
 import javax.sql.DataSource;
-import org.centrale.api.PlayerRepository;
+import org.centrale.api.repository.PlayerRepository;
 import org.centrale.api.entity.PlayerEntity;
 import org.centrale.domain.Player;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -19,7 +19,7 @@ public class PlayerDBService {
     }
 
     // Use of JDBC to retrieve DB info
-    public Player getPlayerById(Integer id) {
+    public Player getPlayerById(Long id) {
         JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
         return jdbcTemplate.queryForObject("SELECT * from players where id = ?",
                 (rs, rowNum) -> new Player(rs.getInt("id"), rs.getString("name")), id);
@@ -27,7 +27,7 @@ public class PlayerDBService {
 
 
     // Use of JPA (hibernate).
-    public PlayerEntity getPlayerEntity(Integer id){
+    public PlayerEntity getPlayerEntity(Long id){
         return playerRepository.findById(id).orElseThrow();
     }
 
