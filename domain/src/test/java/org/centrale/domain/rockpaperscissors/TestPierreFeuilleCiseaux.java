@@ -32,7 +32,7 @@ public class TestPierreFeuilleCiseaux {
     @Test
     public void gameTimeline(){
         Game game = new Game();
-        game.playNextRound("rock", "rock");
+        game.playNextRound("rock", "scissors");
         Assertions.assertEquals(game.getScore(1), 0);
     }
 

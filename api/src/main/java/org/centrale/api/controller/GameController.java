@@ -27,6 +27,11 @@ public class GameController {
         return "Usage : /game/player/add ou /game/player/remove";
     }
 
+    @GetMapping("/game/player/list")
+    public String gameList(){
+        return "La liste des joueurs est : " + this.gameService.getPlayers();
+    }
+
     @PostMapping("/game/player/add")
     public String gameNewPlayer(@RequestParam String name){
         this.gameService.addPlayer(name);
@@ -47,7 +52,9 @@ public class GameController {
 
     @PostMapping("/game/play")
     public String gameTurn(@RequestParam String hand1, @RequestParam String hand2){
-        return "Le résultat est : "; // + this.gameService.playTurn(hand1, hand2);
+        this.gameService.playTurn(hand1, hand2);
+        System.out.println(this.gameService.getScore(1));
+        return "Le score est : " + this.gameService.getScore(1) + " - " + this.gameService.getScore(2);
     }
 
 }
