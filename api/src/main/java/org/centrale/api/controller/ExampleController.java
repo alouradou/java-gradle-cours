@@ -1,6 +1,7 @@
 package org.centrale.api.controller;
 
 import org.centrale.domain.tourniquet.TourniquetMetro;
+import org.centrale.api.service.CacheService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -9,6 +10,12 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 public class ExampleController {
+
+    CacheService cacheService;
+
+    public ExampleController(CacheService cacheService){
+        this.cacheService = cacheService;
+    }
 
     @GetMapping("/")
     public String hello(){
@@ -33,6 +40,16 @@ public class ExampleController {
     @GetMapping("class")
     public TourniquetMetro printClass(){
         return new TourniquetMetro();
+    }
+
+    @PostMapping("/caching/add")
+    public void add(@RequestParam String s){
+        cacheService.add(s);
+    }
+
+    @GetMapping("/caching")
+    public String getList(){
+        return cacheService.get().toString();
     }
 
 }
