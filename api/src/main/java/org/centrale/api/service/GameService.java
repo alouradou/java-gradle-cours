@@ -3,13 +3,21 @@ package org.centrale.api.service;
 import org.centrale.domain.rockpaperscissors.Game;
 import org.centrale.domain.rockpaperscissors.RockPaperScissors;
 import org.springframework.http.HttpStatus;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
+import javax.sql.DataSource;
 import java.util.NoSuchElementException;
 
 @Component
 public class GameService {
+
+    DataSource dataSource;
+
+    public GameService(DataSource dataSource){
+        this.dataSource = dataSource;
+    }
 
     public Game game = new Game();
 
@@ -17,6 +25,10 @@ public class GameService {
     private String player2 = "";
 
     public void addPlayer(String name){
+        Integer id = 5;
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate.update("INSERT INTO players values (?,?)", id, name);
+
         if(player1.equals("")){
             player1 = name;
         } else if(player2.equals("")){
