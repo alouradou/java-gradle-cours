@@ -1,22 +1,23 @@
 package org.centrale.api.service;
 
+import org.centrale.api.GameEntity;
+import org.centrale.api.GameRepository;
 import org.centrale.domain.rockpaperscissors.Game;
-import org.centrale.domain.rockpaperscissors.RockPaperScissors;
 import org.springframework.http.HttpStatus;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Component;
 import org.springframework.web.server.ResponseStatusException;
 
 import javax.sql.DataSource;
-import java.util.NoSuchElementException;
 
 @Component
 public class GameService {
 
     DataSource dataSource;
+    GameRepository gameRepository;
 
-    public GameService(DataSource dataSource){
+    public GameService(DataSource dataSource, GameRepository gameRepository){
         this.dataSource = dataSource;
+        this.gameRepository = gameRepository;
     }
 
     public Game game = new Game();
@@ -25,22 +26,36 @@ public class GameService {
     private String player2 = "";
 
     public void addPlayer(String name){
-        Integer id = 5;
-        JdbcTemplate jdbcTemplate = new JdbcTemplate(dataSource);
-        jdbcTemplate.update("INSERT INTO players values (?,?)", id, name);
+        GameEntity game = new GameEntity();
 
         if(player1.equals("")){
             player1 = name;
+            game.setNamePlayer1(name);
         } else if(player2.equals("")){
             player2 = name;
+            game.setNamePlayer2(name);
         }
         else {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Il y a déjà deux joueurs !");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Il y a déjà deux joueurs dans cette partie !");
         }
+
+        this.gameRepository.save(game);
     }
 
     public String getPlayers() {
         return player1 + ", " + player2;
+    }
+
+    public Integer getScore(Integer player) {
+        if(player == 1){
+            return game.getScore(1);
+        }
+        else if(player == 2){
+            return game.getScore(2);
+        }
+        else {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce joueur n'existe pas !");
+        }
     }
 
     public void removePlayer(String name){
@@ -66,14 +81,21 @@ public class GameService {
     }
 
     public void playTurn(String hand1, String hand2){
+        GameEntity gameEntity = new GameEntity();
+
         // Check if there are two players
         if (!player1.equals("") && !player2.equals("")) {
             game.playNextRound(hand1, hand2);
+            System.out.println(game.getScore(1));
+            System.out.println(game.getScore(2));
+            gameEntity.setScorePlayer1(game.getScore(1));
+            gameEntity.setScorePalyer2(game.getScore(2));
             System.out.println("Le score est : " + game.getScore(1) + " - " + game.getScore(2));
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Il n'y a pas deux joueurs !");
         }
+        gameRepository.save(gameEntity);
     }
 
 
