@@ -1,9 +1,11 @@
 package org.centrale.api.controller;
 
+import org.centrale.domain.tourniquet.TourniquetMetro;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
+
 
 @RestController
 public class ExampleController {
@@ -26,6 +28,11 @@ public class ExampleController {
     @GetMapping("test2")
     public String play2(@RequestParam String user, @RequestParam String age){
         return "Hello " + user + "! Tu as " + age + " an" + (Integer.parseInt(age) > 1 ? "s" : "") + " !";
+    }
+
+    @GetMapping("class")
+    public TourniquetMetro printClass(){
+        return new TourniquetMetro();
     }
 
 }
