@@ -17,11 +17,6 @@ public class ExampleController {
         this.cacheService = cacheService;
     }
 
-    @GetMapping("/")
-    public String hello(){
-        return "Hello World!";
-    }
-
     @GetMapping("test")
     public String play(@RequestParam String param){
         return param;
