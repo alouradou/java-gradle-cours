@@ -1,8 +1,6 @@
 package org.centrale.api.controller;
 
-import org.centrale.api.service.CacheService;
 import org.centrale.api.service.GameService;
-import org.springframework.lang.NonNull;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -17,29 +15,29 @@ public class GameController {
         this.gameService = gameService;
     }
 
-    @GetMapping("/game")
+    @GetMapping("/")
     public String gameHome(){
         return "Bienvenue dans le game !";
     }
 
-    @GetMapping("/game/player")
+    @GetMapping("/player")
     public String gameUsage(){
-        return "Usage : /game/player/add ou /game/player/remove";
+        return "Usage : POST /game/player?name=<name> ou /game/player/remove?id=<id>";
     }
 
-    @GetMapping("/game/player/list")
+    @GetMapping("/player/list")
     public String gameList(){
         return "La liste des joueurs est : " + this.gameService.getPlayers();
     }
 
-    @PostMapping("/game/player/add")
+    @PostMapping("/player")
     public String gameNewPlayer(@RequestParam String name){
         this.gameService.addPlayer(name);
         return "Nouveau joueur " + name + " créé !\n" +
                 "La liste des joueurs est : " + this.gameService.getPlayers();
     }
 
-    @PostMapping("/game/player/remove")
+    @PostMapping("/player/remove")
     public String gameRemovePlayer(@RequestParam String name) {
         if(name.equals("1") || name.equals("2")){
             this.gameService.removePlayer(Integer.parseInt(name));
@@ -50,7 +48,7 @@ public class GameController {
         return "Joueur supprimé !";
     }
 
-    @PostMapping("/game/play")
+    @PostMapping("/play")
     public String gameTurn(@RequestParam String hand1, @RequestParam String hand2){
         this.gameService.playTurn(hand1, hand2);
         System.out.println(this.gameService.getScore(1));
