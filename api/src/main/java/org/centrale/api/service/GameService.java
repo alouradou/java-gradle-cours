@@ -1,7 +1,7 @@
 package org.centrale.api.service;
 
-import org.centrale.api.GameEntity;
-import org.centrale.api.GameRepository;
+import org.centrale.api.entity.GameEntity;
+import org.centrale.api.repository.GameRepository;
 import org.centrale.domain.rockpaperscissors.Game;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -96,6 +96,10 @@ public class GameService {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Il n'y a pas deux joueurs !");
         }
         gameRepository.save(gameEntity);
+    }
+
+    public void play(Long player1Id, Long player2Id){
+
     }
 
 
