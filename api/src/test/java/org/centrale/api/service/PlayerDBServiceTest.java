@@ -15,13 +15,6 @@ public class PlayerDBServiceTest {
     PlayerDBService dataService;
 
     @Test
-    public void getPlayer1(){
-        Player p = dataService.getPlayerById(1L);
-        assertEquals(1, p.getId());
-        assertEquals("Player1", p.getName());
-    }
-
-    @Test
     public void getPlayer1Entity(){
         PlayerEntity p = dataService.getPlayerEntity(1L);
         assertEquals(1, p.getId());

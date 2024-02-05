@@ -2,30 +2,26 @@ package org.centrale.api.entity;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.Getter;
 import lombok.Setter;
 
+@Setter
+@Getter
 @Entity
 @Table(name = "game")
-@Getter
-@Setter
 public class GameEntity {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    @GeneratedValue(strategy = jakarta.persistence.GenerationType.IDENTITY)
+    private Integer id;
 
-    @ManyToOne
-    private PlayerEntity player1;
+    private String namePlayer1;
+    private String namePlayer2;
 
-    @ManyToOne
-    private PlayerEntity player2;
+    private Integer scorePlayer1;
+    private Integer scorePalyer2;
 
-    @ManyToOne
-    private PlayerEntity winner;
 
 }
