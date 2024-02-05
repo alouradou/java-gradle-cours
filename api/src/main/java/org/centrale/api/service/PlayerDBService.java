@@ -31,9 +31,19 @@ public class PlayerDBService {
         return playerRepository.findById(id).orElseThrow();
     }
 
+
     public void addNewPlayer(String name){
         PlayerEntity newPlayer = new PlayerEntity();
         newPlayer.setName(name);
         playerRepository.save(newPlayer);
+    }
+
+    public String getPlayers() {
+        Iterable<PlayerEntity> players = playerRepository.findAll();
+        StringBuilder result = new StringBuilder();
+        for (PlayerEntity player : players) {
+            result.append("id: ").append(player.getId()).append(", Nom: ").append(player.getName()).append("\n");
+        }
+        return result.toString();
     }
 }
