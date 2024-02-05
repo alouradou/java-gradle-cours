@@ -1,6 +1,7 @@
 package org.centrale.api.controller;
 
 import org.centrale.api.service.GameService;
+import org.centrale.api.service.PlayerDBService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -10,9 +11,11 @@ import org.springframework.web.bind.annotation.RestController;
 public class GameController {
 
     GameService gameService;
+    final PlayerDBService playerDBService;
 
-    public GameController(GameService gameService){
+    public GameController(GameService gameService, PlayerDBService playerDBService){
         this.gameService = gameService;
+        this.playerDBService = playerDBService;
     }
 
     @GetMapping("/")
@@ -25,16 +28,17 @@ public class GameController {
         return "Usage : POST /game/player?name=<name> ou /game/player/remove?id=<id>";
     }
 
+    @PostMapping("/player-play")
+    public String gameNewPlayer(@RequestParam String name){
+        this.gameService.addPlayer(name);
+        playerDBService.addNewPlayer(name);
+        return "Nouveau joueur " + name + " créé !\n" +
+                "La liste des joueurs est : " + this.gameService.getPlayers();
+    }
+
     @GetMapping("/player/list")
     public String gameList(){
         return "La liste des joueurs est : " + this.gameService.getPlayers();
-    }
-
-    @PostMapping("/player")
-    public String gameNewPlayer(@RequestParam String name){
-        this.gameService.addPlayer(name);
-        return "Nouveau joueur " + name + " créé !\n" +
-                "La liste des joueurs est : " + this.gameService.getPlayers();
     }
 
     @PostMapping("/player/remove")
