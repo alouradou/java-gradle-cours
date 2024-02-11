@@ -100,7 +100,6 @@ public class GameService {
 
     public void play(Long player1Id, Long player2Id, String handPlayer1, String handPlayer2){
         this.playTurn(handPlayer1, handPlayer2);
-
     }
 
 
