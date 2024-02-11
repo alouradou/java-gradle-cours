@@ -1,6 +1,7 @@
 package org.centrale.api.controller;
 
 import org.centrale.api.entity.PlayerEntity;
+import org.centrale.api.service.GameDBService;
 import org.centrale.api.service.GameService;
 import org.centrale.api.service.PlayerDBService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -13,10 +14,12 @@ public class GameController {
 
     GameService gameService;
     final PlayerDBService playerDBService;
+    final GameDBService gameDBService;
 
-    public GameController(GameService gameService, PlayerDBService playerDBService){
+    public GameController(GameService gameService, PlayerDBService playerDBService, GameDBService gameDBService){
         this.gameService = gameService;
         this.playerDBService = playerDBService;
+        this.gameDBService = gameDBService;
     }
 
     @GetMapping("/")
@@ -45,6 +48,9 @@ public class GameController {
         this.gameService.play(handPlayer1, handPlayer2);
 
         Integer winner = this.gameService.getWinner();
+
+        System.out.println(gameDBService.getGamesList());
+
         if (winner == 1){
             return "Le joueur " + p1.getName() + " a gagné !";
         }
