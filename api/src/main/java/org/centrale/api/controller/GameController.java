@@ -42,7 +42,7 @@ public class GameController {
         this.gameService.addPlayer(p1.getName());
         this.gameService.addPlayer(p2.getName());
 
-        this.gameService.play(player1Id, player2Id, handPlayer1, handPlayer2);
+        this.gameService.play(handPlayer1, handPlayer2);
 
         Integer winner = this.gameService.getWinner();
         if (winner == 1){
