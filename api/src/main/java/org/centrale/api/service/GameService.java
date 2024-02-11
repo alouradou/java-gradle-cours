@@ -2,7 +2,6 @@ package org.centrale.api.service;
 
 import org.centrale.api.entity.GameEntity;
 import org.centrale.api.repository.GameRepository;
-import org.centrale.domain.Player;
 import org.centrale.domain.rockpaperscissors.Game;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -40,7 +39,7 @@ public class GameService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Il y a déjà deux joueurs dans cette partie !");
         }
 
-        this.gameRepository.save(game);
+//        this.gameRepository.save(game);
     }
 
     public String getPlayers() {
@@ -60,6 +59,12 @@ public class GameService {
     }
 
     public Integer getWinner(){
+        GameEntity gameEntity = new GameEntity();
+        gameEntity.setNamePlayer1(player1);
+        gameEntity.setNamePlayer2(player2);
+        gameEntity.setScorePlayer1(game.getScore(1));
+        gameEntity.setScorePlayer2(game.getScore(2));
+        gameRepository.save(gameEntity);
         if (game.getScore(1) > game.getScore(2)){
             return 1;
         }
@@ -99,16 +104,13 @@ public class GameService {
         // Check if there are two players
         if (!player1.isEmpty() && !player2.isEmpty()) {
             game.playNextRound(hand1, hand2);
-            System.out.println(game.getScore(1));
-            System.out.println(game.getScore(2));
             gameEntity.setScorePlayer1(game.getScore(1));
-            gameEntity.setScorePalyer2(game.getScore(2));
-            System.out.println("Le score est : " + game.getScore(1) + " - " + game.getScore(2));
+            gameEntity.setScorePlayer2(game.getScore(2));
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Il n'y a pas deux joueurs !");
         }
-        gameRepository.save(gameEntity);
+//        gameRepository.save(gameEntity);
     }
 
     public void play(String handPlayer1, String handPlayer2){

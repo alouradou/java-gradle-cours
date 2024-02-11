@@ -21,7 +21,7 @@ public class GameEntity {
     private String namePlayer2;
 
     private Integer scorePlayer1;
-    private Integer scorePalyer2;
+    private Integer scorePlayer2;
 
 
 }
