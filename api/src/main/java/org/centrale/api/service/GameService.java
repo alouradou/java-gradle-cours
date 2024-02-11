@@ -111,7 +111,7 @@ public class GameService {
         gameRepository.save(gameEntity);
     }
 
-    public void play(Long player1Id, Long player2Id, String handPlayer1, String handPlayer2){
+    public void play(String handPlayer1, String handPlayer2){
         this.playTurn(handPlayer1, handPlayer2);
     }
 

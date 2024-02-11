@@ -23,7 +23,7 @@ public class GameServiceTests {
         gameService.addPlayer(p1.getName());
         gameService.addPlayer(p2.getName());
 
-        gameService.play(p1.getId(), p2.getId(), "paper", "rock");
+        gameService.play("paper", "rock");
         assertEquals(1, this.gameService.getScore(1));
     }
 
