@@ -84,7 +84,7 @@ public class GameService {
         GameEntity gameEntity = new GameEntity();
 
         // Check if there are two players
-        if (!player1.equals("") && !player2.equals("")) {
+        if (!player1.isEmpty() && !player2.isEmpty()) {
             game.playNextRound(hand1, hand2);
             System.out.println(game.getScore(1));
             System.out.println(game.getScore(2));
@@ -98,7 +98,8 @@ public class GameService {
         gameRepository.save(gameEntity);
     }
 
-    public void play(Long player1Id, Long player2Id){
+    public void play(Long player1Id, Long player2Id, String handPlayer1, String handPlayer2){
+        this.playTurn(handPlayer1, handPlayer2);
 
     }
 

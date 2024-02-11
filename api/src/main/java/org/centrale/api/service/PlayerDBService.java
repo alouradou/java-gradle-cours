@@ -42,7 +42,7 @@ public class PlayerDBService {
         Iterable<PlayerEntity> players = playerRepository.findAll();
         StringBuilder result = new StringBuilder();
         for (PlayerEntity player : players) {
-            result.append("id: ").append(player.getId()).append(", Nom: ").append(player.getName()).append("\n");
+            result.append("id : ").append(player.getId()).append(", Nom : ").append(player.getName()).append("\n");
         }
         return result.toString();
     }
