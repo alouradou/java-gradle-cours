@@ -1,5 +1,6 @@
 package org.centrale.api.controller;
 
+import org.centrale.api.entity.PlayerEntity;
 import org.centrale.api.service.GameService;
 import org.centrale.api.service.PlayerDBService;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,10 +36,24 @@ public class GameController {
     // POST /play?player1Id=ID1&player2Id=ID2&handPlayer1=HAND1&handPlayer2=HAND2 (le résultat devra etre persisté)
     @PostMapping("/play")
     public String gameTurn(@RequestParam Long player1Id, @RequestParam Long player2Id, @RequestParam String handPlayer1, @RequestParam String handPlayer2){
-        this.gameService.addPlayer(playerDBService.getPlayerEntity(player1Id).getName());
-        this.gameService.addPlayer(playerDBService.getPlayerEntity(player2Id).getName());
+        PlayerEntity p1 = playerDBService.getPlayerEntity(player1Id);
+        PlayerEntity p2 = playerDBService.getPlayerEntity(player2Id);
+
+        this.gameService.addPlayer(p1.getName());
+        this.gameService.addPlayer(p2.getName());
+
         this.gameService.play(player1Id, player2Id, handPlayer1, handPlayer2);
-        return "Le score est : " + this.gameService.getScore(1) + " - " + this.gameService.getScore(2);
+
+        Integer winner = this.gameService.getWinner();
+        if (winner == 1){
+            return "Le joueur " + p1.getName() + " a gagné !";
+        }
+        else if (winner == 2){
+            return "Le joueur " + p2.getName() + " a gagné !";
+        }
+        else {
+            return "Match nul !";
+        }
     }
 
 

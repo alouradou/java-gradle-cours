@@ -2,6 +2,7 @@ package org.centrale.api.service;
 
 import org.centrale.api.entity.GameEntity;
 import org.centrale.api.repository.GameRepository;
+import org.centrale.domain.Player;
 import org.centrale.domain.rockpaperscissors.Game;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
@@ -55,6 +56,18 @@ public class GameService {
         }
         else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ce joueur n'existe pas !");
+        }
+    }
+
+    public Integer getWinner(){
+        if (game.getScore(1) > game.getScore(2)){
+            return 1;
+        }
+        else if (game.getScore(1) < game.getScore(2)){
+            return 2;
+        }
+        else {
+            return 0;
         }
     }
 
