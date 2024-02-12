@@ -3,7 +3,6 @@ package org.centrale.api.service;
 import org.centrale.api.entity.GameEntity;
 import org.centrale.api.entity.PlayerEntity;
 import org.centrale.api.repository.GameRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
@@ -39,13 +38,13 @@ public class GameDBService {
         return result.toString();
     }
 
-    public List<GameEntity> getPlayerGames(Long playerId) {
-        return gameRepository.findByPlayer1IdOrPlayer2Id(playerId, playerId);
+    public List<GameEntity> getPlayerGames(String playerName) {
+        return gameRepository.findByNamePlayer1OrNamePlayer2(playerName, playerName);
     }
 
     public String getGameStats(Long playerId){
         PlayerEntity p = playerDataSource.getPlayerEntity(playerId);
-        List<GameEntity> playerGames = getPlayerGames(playerId);
+        List<GameEntity> playerGames = getPlayerGames(p.getName());
 
         int gamesWon = 0;
         int gamesLost = 0;
