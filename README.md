@@ -60,6 +60,3 @@ curl -X GET -H "Content-Type: application/json" "localhost:8080/games"
 ```bash
 curl -X GET -H "Content-Type: application/json" "localhost:8080/player/list"
 ```
-
-## Améliorations possibles
-
