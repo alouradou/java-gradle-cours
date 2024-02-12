@@ -18,28 +18,23 @@ public class GameService {
     public GameService(DataSource dataSource, GameRepository gameRepository){
         this.dataSource = dataSource;
         this.gameRepository = gameRepository;
+        this.game = new Game();
     }
 
-    public Game game = new Game();
+    public Game game;
 
     private String player1 = "";
     private String player2 = "";
 
     public void addPlayer(String name){
-        GameEntity game = new GameEntity();
-
-        if(player1.equals("")){
+        if(player1.isEmpty()){
             player1 = name;
-            game.setNamePlayer1(name);
-        } else if(player2.equals("")){
+        } else if(player2.isEmpty()){
             player2 = name;
-            game.setNamePlayer2(name);
         }
         else {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Il y a déjà deux joueurs dans cette partie !");
         }
-
-//        this.gameRepository.save(game);
     }
 
     public String getPlayers() {
@@ -99,18 +94,13 @@ public class GameService {
     }
 
     public void playTurn(String hand1, String hand2){
-        GameEntity gameEntity = new GameEntity();
-
         // Check if there are two players
         if (!player1.isEmpty() && !player2.isEmpty()) {
             game.playNextRound(hand1, hand2);
-            gameEntity.setScorePlayer1(game.getScore(1));
-            gameEntity.setScorePlayer2(game.getScore(2));
         }
         else {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, "Il n'y a pas deux joueurs !");
         }
-//        gameRepository.save(gameEntity);
     }
 
     public void play(String handPlayer1, String handPlayer2){
