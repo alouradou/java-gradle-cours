@@ -1,7 +1,6 @@
 package org.centrale.domain.visitor;
 
 import org.centrale.domain.composite.*;
-import org.centrale.domain.composite.Form;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
