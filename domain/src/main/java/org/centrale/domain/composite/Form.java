@@ -1,6 +1,5 @@
 package org.centrale.domain.composite;
 
-import org.centrale.domain.composite.Button;
 import org.centrale.domain.visitor.Visitor;
 
 public class Form extends Button {

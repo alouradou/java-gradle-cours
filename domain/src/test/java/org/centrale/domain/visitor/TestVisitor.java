@@ -12,7 +12,6 @@ public class TestVisitor {
         RenderVisitor visitor = new RenderVisitor();
         Button button = new Button("Button");
         Map map = new Map("Map");
-        Form form = new Form(button);
 
         button.accept(visitor);
         map.accept(visitor);
