@@ -1,11 +1,7 @@
 package org.centrale.domain.composite;
 
-import org.centrale.domain.Form;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
-
-import java.awt.*;
-import java.io.ByteArrayOutputStream;
 
 public class TestComposite {
 

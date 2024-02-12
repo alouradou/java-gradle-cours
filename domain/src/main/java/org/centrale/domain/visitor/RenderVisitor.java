@@ -1,6 +1,6 @@
 package org.centrale.domain.visitor;
 
-import org.centrale.domain.Form;
+import org.centrale.domain.composite.Form;
 import org.centrale.domain.composite.Button;
 import org.centrale.domain.composite.Map;
 
