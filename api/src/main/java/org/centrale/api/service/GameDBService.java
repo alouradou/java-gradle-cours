@@ -1,19 +1,24 @@
 package org.centrale.api.service;
 
 import org.centrale.api.entity.GameEntity;
+import org.centrale.api.entity.PlayerEntity;
 import org.centrale.api.repository.GameRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import javax.sql.DataSource;
+import java.util.List;
 
 @Component
 public class GameDBService {
     final DataSource dataSource;
     final GameRepository gameRepository;
+    final PlayerDBService playerDataSource;
 
-    public GameDBService(DataSource dataSource, GameRepository gameRepository) {
+    public GameDBService(DataSource dataSource, GameRepository gameRepository, PlayerDBService playerDataSource) {
         this.dataSource = dataSource;
         this.gameRepository = gameRepository;
+        this.playerDataSource = playerDataSource;
     }
 
     // use of JPA (hibernate)
@@ -29,9 +34,41 @@ public class GameDBService {
         Iterable<GameEntity> games = gameRepository.findAll();
         StringBuilder result = new StringBuilder();
         for (GameEntity game : games) {
-            result.append("id : ").append(game.getId()).append(", Joueur 1 : ").append(game.getNamePlayer1()).append(", Joueur 2 : ").append(game.getNamePlayer2()).append("\n");
+            result.append(game.getNamePlayer1()).append(" vs ").append(game.getNamePlayer2()).append(" : ").append(game.getScorePlayer1()).append(" - ").append(game.getScorePlayer2()).append("\n");
         }
         return result.toString();
+    }
+
+    public List<GameEntity> getPlayerGames(Long playerId) {
+        return gameRepository.findByPlayer1IdOrPlayer2Id(playerId, playerId);
+    }
+
+    public String getGameStats(Long playerId){
+        PlayerEntity p = playerDataSource.getPlayerEntity(playerId);
+        List<GameEntity> playerGames = getPlayerGames(playerId);
+
+        int gamesWon = 0;
+        int gamesLost = 0;
+
+        for (GameEntity game : playerGames) {
+            if (game.getNamePlayer1().equals(p.getName())) {
+                if (game.getScorePlayer1() > game.getScorePlayer2()) {
+                    gamesWon++;
+                }
+                else {
+                    gamesLost++;
+                }
+            }
+            else if (game.getNamePlayer2().equals(p.getName())) {
+                if (game.getScorePlayer2() > game.getScorePlayer1()) {
+                    gamesWon++;
+                }
+                else {
+                    gamesLost++;
+                }
+            }
+        }
+        return "Parties gagnées : " + gamesWon + ", Parties perdues : " + gamesLost;
     }
 
 
