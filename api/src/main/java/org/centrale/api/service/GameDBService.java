@@ -54,7 +54,7 @@ public class GameDBService {
                 if (game.getScorePlayer1() > game.getScorePlayer2()) {
                     gamesWon++;
                 }
-                else {
+                else if (game.getScorePlayer1() < game.getScorePlayer2()){
                     gamesLost++;
                 }
             }
@@ -62,7 +62,7 @@ public class GameDBService {
                 if (game.getScorePlayer2() > game.getScorePlayer1()) {
                     gamesWon++;
                 }
-                else {
+                else if (game.getScorePlayer2() < game.getScorePlayer1()){
                     gamesLost++;
                 }
             }
