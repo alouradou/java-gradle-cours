@@ -7,6 +7,6 @@ import java.util.List;
 
 public interface GameRepository extends CrudRepository<GameEntity, Integer> {
 
-    List<GameEntity> findByPlayer1IdOrPlayer2Id(Long playerId1, Long playerId2);
+    List<GameEntity> findByNamePlayer1OrNamePlayer2(String namePlayer1, String namePlayer2);
 
 }
